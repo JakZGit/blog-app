@@ -7,6 +7,12 @@ var bodyParser = require('body-parser');
 var blog = require('./routes/blog');
 var app = express();
 
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost/blog-app', { promiseLibrary: require('bluebird'), useNewUrlParser: true })
+  .then(() =>  console.log('connection successful'))
+  .catch((err) => console.error(err));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
