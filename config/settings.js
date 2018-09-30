@@ -1,3 +1,3 @@
-modules.exports = {
+module.exports = {
 	'secret' : 'blog-app'
 };
