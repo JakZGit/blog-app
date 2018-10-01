@@ -1,18 +1,21 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path');
+const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-	entry: "./src/index.js",
-	mode: "development",
+	entry: './src/index.js',
+	mode: 'development',
 	module: {
 		rules: [
 			{
 				test:/\.(js|jsx)$/, //transform es6, jsx
-				exclude: /(node_modules|bower_components)/,
+				exclude: /node_modules/,
 				loader: 'babel-loader',
-				options: { presets: ['env'] }
+				options: {
+					presets: ['env'],
+					plugins: ['transform-class-properties']
+				}
 			},
 			{
 				test: /\.css$/,
@@ -27,14 +30,14 @@ module.exports = {
  	new CleanWebpackPlugin(['dist'])
 	],
   	output: {
-	    path: path.resolve(__dirname, "dist/"),
-	    publicPath: "/dist/", //where to server files
-	    filename: "bundle.js"
+	    path: path.resolve(__dirname, 'dist/'),
+	    publicPath: '/dist/', //where to server files
+	    filename: 'bundle.js'
   	},
 	devServer: {
-		contentBase: path.join(__dirname, "public/"),
+		contentBase: path.join(__dirname, 'public/'),
 		port: 3000,
-		publicPath: "http://localhost:3000/dist/",
+		publicPath: 'http://localhost:3000/dist/',
 		hotOnly: true
 	}
 };

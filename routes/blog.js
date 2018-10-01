@@ -29,14 +29,19 @@ router.get('/', passport.authenticate('jwt', {session: false}), function(req, re
 	} else {
 		return res.status(403).send({success: false, msg: 'Unauthorized.'});
 	}
-
 });
 
 /* Save blog. */
 router.post('/', passport.authenticate('jwt', {session: false}), function(req, res, next) {
 	var token = getToken(req.headers);
 	if(token) {
-		Blog.create(req.body, function(err, post) {
+		var data = {
+			title: req.body.title,
+			author: req.user.name,
+			post: req.body.post,
+			user: req.user._id
+		}
+		Blog.create(data, function(err, post) {
 			if(err) return next(err);
 			res.json(post);
 		});
