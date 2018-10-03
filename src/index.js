@@ -6,7 +6,8 @@ import './App.css';
 import App from './App.js';
 import Login from './components/Login';
 import Register from './components/Register';
-import Create from './components/Create';
+import CreatePost from './components/CreatePost';
+import UserPost from './components/UserPost';
 
 ReactDOM.render(
 	<BrowserRouter>
@@ -14,7 +15,8 @@ ReactDOM.render(
 			<Route exact path='/' component={App} />
 			<Route path='/login' component={Login} />
 			<Route path='/register' component={Register} />
-			<Route path='/create' component={Create} />
+			<Route path='/edit/:id?' component={CreatePost} />
+			<Route path='/user' component={UserPost} />
 		</div>
 	</BrowserRouter>,
   document.getElementById('root')

@@ -5,7 +5,7 @@ var BlogSchema = new mongoose.Schema({
 	author: String,
 	post: String,
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	published_date : {type: Date }
+	published_date : {type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Blog', BlogSchema);

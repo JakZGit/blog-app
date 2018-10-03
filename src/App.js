@@ -42,7 +42,8 @@ class App extends Component {
 		              BLOGS &nbsp;
 		              {localStorage.getItem('jwtToken') &&
 		              	(<div>
-			              	<Link to="/create"><button class="btn btn-lg btn-primary" type="buttton">Create</button></Link>
+			              	<Link to="/edit"><button class="btn btn-lg btn-primary" type="buttton">Create</button></Link>
+			              	<Link to="/user"><button class="btn btn-lg btn-primary" type="buttton">My Post</button></Link>
 			                <button class="btn btn-primary float-right" onClick={this.logout}>Logout</button>
 		                </div>)
 		              }
@@ -68,7 +69,7 @@ class App extends Component {
 		      </div>
 		    );
 		else
-			return ( <div>Redirecting...</div> );
+			return ( <div></div> );
 	}
 }
 
