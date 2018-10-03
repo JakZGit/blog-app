@@ -40,7 +40,7 @@ class CreatePost extends Component {
 		var url = blog_id ? '/api/blog/' + blog_id : '/api/blog/';
 		axios.post(url, {title, post})
 			.then((result) => {
-				this.props.history.push("/");
+				this.props.history.push("/user");
 			})
 			.catch((error) => {
 				if(error.response.status === 401) {

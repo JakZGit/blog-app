@@ -58,6 +58,7 @@ router.post('/:id?', passport.authenticate('jwt', {session: false}), function(re
 			Blog.findOneAndUpdate({_id: req.params.id}, data, {upsert:true}, function(err, doc){
 			    if (err) return next(err);
 			    return res.send("succesfully saved");
+			    //res.status(200).send(response);
 			});
 		} else {
 			data['author'] = req.user.name;
@@ -71,6 +72,20 @@ router.post('/:id?', passport.authenticate('jwt', {session: false}), function(re
 		return res.status(403).send({success: false, msg: 'Unauthorized.'});
 	}
 });
+
+/* Delete blog. */
+router.delete('/user/:id',passport.authenticate('jwt', {session: false}), function(req, res, next) {
+	var token = getToken(req.headers);
+	if(token) {
+		Blog.findByIdAndRemove({_id: req.params.id}, function(err, doc){
+			  if (err) return next(err);
+			    return res.send("succesfully deleted");
+			    //res.status(200).send(response);
+		})
+	} else {
+		return res.status(403).send({success: false, msg: 'Unauthorized.'});
+	}
+})
 
 
 

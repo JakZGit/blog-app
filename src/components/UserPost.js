@@ -28,6 +28,27 @@ class UserPost extends Component {
 	  this.props.history.push('/edit/' + id);
 	}
 
+	deletePost = (id) => {
+		if(confirm('Are you sure you want to delete post?')){
+			axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwtToken');
+			axios.delete('/api/blog/user/' + id)
+				.then((res) => {
+					window.location.reload();
+				})
+				.catch((error) => {
+					if(error.response.status === 401) {
+						this.props.history.push('/login');
+					}
+				});
+		} else {
+			this.props.history.push('/user');
+		}
+	}
+
+	logout = () => {
+		localStorage.removeItem('jwtToken');
+		window.location.reload();
+	}
 
 	render() {
 		return (
@@ -66,7 +87,7 @@ class UserPost extends Component {
 		                              <span onClick={() => this.updatePost(userPost._id)} class="fas fa-edit"></span>
 		                            </td>
 		                            <td>
-		                              <span class="fas fa-trash"></span>
+		                              <span onClick={() => this.deletePost(userPost._id)} class="fas fa-trash"></span>
 		                            </td>
 		                        </tr>
 			                	)}
